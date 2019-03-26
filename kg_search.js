@@ -28,14 +28,35 @@ window.onload = init;
 
 function init() {
       document.getElementById("wordSearchTitle").innerHTML = wordSearchTitle;
-      for (var i = 0; i < wordArray.length; i++) {
-            var wordList;
-            wordList += document.getElementById("wordList").innerHTML = [i];
-            return wordList;
-      }
-
+      document.getElementById("wordTable").innerHTML = drawWordSearch(letterGrid, wordGrid);
+      document.getElementById("wordList").innerHTML = showList(wordArray);
+      changeColor();
 }
 
+function changeColor() {
+      var letters = document.querySelectorAll("table#wordSearchTable td");
+      for (var i = 0; i < letters.length; i++) {
+            letters[i].addEventListener('click', function (e) {
+                  if (e.target.className == "normal") {
+                        e.target.style.backgroundColor = "rgb(130, 240, 66)";
+                  } else if (e.target.className == "wordCell") {
+                        e.target.style.backgroundColor = "rgb(240, 66, 95)";
+                        document.getElementById("pickedLetters").value =
+                  }
+            })
+      }
+      // var normalLetters = document.querySelectorAll("table#wordSearchTable td.normal");
+      // document.getElementsByClassName("normal").addEventListener("click", function () {
+      //       for (var i = 0; i < normalLetters.length; i++) {
+      //             normalLetters[i].style.backgroundColor = "rgb(130, 240, 66)";
+      //       }
+      // });
+      // document.getElementsByClassName("wordCell").addEventListener("click", function () {
+      //       for (var i = 0; i < letters.length; i++) {
+      //             letters[i].style.backgroundColor = "rgb(240, 66, 95)";
+      //       }
+      // });
+}
 
 
 
@@ -53,7 +74,7 @@ function drawWordSearch(letters, words) {
 
             for (var j = 0; j < colSize; j++) {
                   if (words[i][j] == " ") {
-                        htmlCode += "<td>";
+                        htmlCode += "<td class='normal'>";
                   } else {
                         htmlCode += "<td class='wordCell'>";
                   }
