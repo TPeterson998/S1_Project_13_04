@@ -24,38 +24,49 @@
       on the items in the list array
 
 */
+// this loads the init function on load
 window.onload = init;
 
 function init() {
+      //these three document.'s set the title, wordsearch, and letter box up
       document.getElementById("wordSearchTitle").innerHTML = wordSearchTitle;
       document.getElementById("wordTable").innerHTML = drawWordSearch(letterGrid, wordGrid);
       document.getElementById("wordList").innerHTML = showList(wordArray);
+      //this is the functions I am calling in
       changeColor();
+      crossOutWords();
+      //I didn't get this to work
+      typeLetters();
 }
 
 function changeColor() {
+      //This sets up a like array with all of the table data cells
       var letters = document.querySelectorAll("table#wordSearchTable td");
+      //This runs through the like array created above 
       for (var i = 0; i < letters.length; i++) {
+            //this makes it so when you click on one of the td's it checks if the class is normal or wordcell and then changes its background color accordingly
             letters[i].addEventListener('click', function (e) {
                   if (e.target.className == "normal") {
                         e.target.style.backgroundColor = "rgb(130, 240, 66)";
                   } else if (e.target.className == "wordCell") {
                         e.target.style.backgroundColor = "rgb(240, 66, 95)";
-                        document.getElementById("pickedLetters").value =
+
                   }
+            });
+      }
+}
+//This function makes it so that when you click on one of the word list words it will change to a lighter color to mark that it has been found
+function crossOutWords() {
+      var words = document.querySelectorAll("ul#wordSearchList li");
+      for (var i = 0; i < words.length; i++) {
+            words[i].addEventListener('click', function (e) {
+                  e.target.style.color = "rgb(0, 0, 0, .5)"
             })
       }
-      // var normalLetters = document.querySelectorAll("table#wordSearchTable td.normal");
-      // document.getElementsByClassName("normal").addEventListener("click", function () {
-      //       for (var i = 0; i < normalLetters.length; i++) {
-      //             normalLetters[i].style.backgroundColor = "rgb(130, 240, 66)";
-      //       }
-      // });
-      // document.getElementsByClassName("wordCell").addEventListener("click", function () {
-      //       for (var i = 0; i < letters.length; i++) {
-      //             letters[i].style.backgroundColor = "rgb(240, 66, 95)";
-      //       }
-      // });
+}
+
+function typeLetters() {
+      document.querySelectorAll("table#wordSearchTable td.wordCell");
 }
 
 
