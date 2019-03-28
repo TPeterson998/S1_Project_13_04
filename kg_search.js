@@ -26,6 +26,8 @@
 */
 // this loads the init function on load
 window.onload = init;
+// this is nessesary for the code to typed in the text box
+var letterValue = "";
 
 function init() {
       //these three document.'s set the title, wordsearch, and letter box up
@@ -35,8 +37,6 @@ function init() {
       //this is the functions I am calling in
       changeColor();
       crossOutWords();
-      //I didn't get this to work
-      typeLetters();
 }
 
 function changeColor() {
@@ -46,11 +46,15 @@ function changeColor() {
       for (var i = 0; i < letters.length; i++) {
             //this makes it so when you click on one of the td's it checks if the class is normal or wordcell and then changes its background color accordingly
             letters[i].addEventListener('click', function (e) {
+
                   if (e.target.className == "normal") {
                         e.target.style.backgroundColor = "rgb(130, 240, 66)";
                   } else if (e.target.className == "wordCell") {
                         e.target.style.backgroundColor = "rgb(240, 66, 95)";
-
+                        //This is what akes the letters be typed
+                        //This grabs the text content of the clicked letter and adds it to the text box only if it is part of the word
+                        letterValue += e.target.textContent;
+                        document.getElementById("pickedLetters").value = letterValue;
                   }
             });
       }
@@ -61,14 +65,12 @@ function crossOutWords() {
       for (var i = 0; i < words.length; i++) {
             words[i].addEventListener('click', function (e) {
                   e.target.style.color = "rgb(0, 0, 0, .5)"
+                  //This makes it so when you cross out a word what you wrote disappears
+                  letterValue = "";
+                  document.getElementById("pickedLetters").value = letterValue;
             })
       }
 }
-
-function typeLetters() {
-      document.querySelectorAll("table#wordSearchTable td.wordCell");
-}
-
 
 
 /*============================================================*/
