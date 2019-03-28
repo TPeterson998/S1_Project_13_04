@@ -64,7 +64,9 @@ function crossOutWords() {
       var words = document.querySelectorAll("ul#wordSearchList li");
       for (var i = 0; i < words.length; i++) {
             words[i].addEventListener('click', function (e) {
-                  e.target.style.color = "rgb(0, 0, 0, .5)"
+                  e.target.style.color = "rgb(0, 0, 0, .5)";
+                  //this draws a line through the words to cross them out when clicked
+                  e.target.style.textDecoration = "line-through"
                   //This makes it so when you cross out a word what you wrote disappears
                   letterValue = "";
                   document.getElementById("pickedLetters").value = letterValue;
